@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
+const TerserPlugin = require("terser-webpack-plugin");
 
 const routes = require('./src/routes.js')
 
@@ -22,15 +23,13 @@ module.exports = (env, options) => {
 
   const entry = isProd
     ? { // Для продакшена
-    fonts: getPath('./src/assets/styles/common/fonts.css'),
     base: [
-      getPath('./src/assets/styles/entries/root.js'),
       getPath('./src/entries/base.js')
     ],
-    top: [
-      getPath('./src/assets/styles/entries/top.js'),
-    ],
     styles: [
+      getPath('./src/assets/styles/entries/root.js'),
+      getPath('./src/assets/styles/common/fonts.css'),
+      getPath('./src/assets/styles/entries/top.js'),
       getPath('./src/assets/styles/entries/common.js'),
       getPath('./src/assets/styles/entries/ui.js'),
       getPath('./src/assets/styles/entries/base.js'),
@@ -65,9 +64,12 @@ module.exports = (env, options) => {
         ]
       }
     ],
+    'postcss-easings',
+    'postcss-for',
     'postcss-responsive-type',
     'postcss-hover-media-feature',
     'postcss-simple-vars',
+    'postcss-hexrgba',
     'postcss-nested',
     'postcss-nested-ancestors',
     'autoprefixer',
@@ -121,10 +123,13 @@ module.exports = (env, options) => {
     entry,
     output: {
       path: getPath('./public/dist'),
-      filename: 'assets/js/[contenthash].bundle.js'
+      filename: 'assets/js/[name].bundle.js'
     },
     optimization: {
       minimizer: [
+        new TerserPlugin({
+          extractComments: false,
+        }),
         new CssMinimizerPlugin({
           minify: [
             CssMinimizerPlugin.cssnanoMinify,
@@ -180,7 +185,7 @@ module.exports = (env, options) => {
           type: 'asset/resource',
           include: /(fonts)/,
           generator: {
-            filename: 'fonts/[hash][ext]'
+            filename: 'fonts/[name][ext]'
           }
         },
         {

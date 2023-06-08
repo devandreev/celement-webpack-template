@@ -35,8 +35,22 @@ export default class App {
 
       this.mediaScreen = newScreen
 
-      onresize(oldScreen, newScreen)
+      onresize.bind(this)(oldScreen, newScreen)
     }, 200))
+  }
+
+  isTouchDevice() {
+    return 'ontouchstart' in document.documentElement
+  }
+
+  isMobileScreen() {
+    const screen = this._getMediaScreen()
+    return !screen.includes('desktop')
+  }
+
+  isDesktopScreen() {
+    const screen = this._getMediaScreen()
+    return screen.includes('desktop')
   }
 
   _getMediaScreen() {
@@ -54,7 +68,7 @@ export default class App {
 
     pluginsKeys.forEach(key => {
       const plugin = plugins[key]
-      const name = '$' + key
+      const name = key
 
       this[name] = plugin
     })

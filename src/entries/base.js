@@ -37,6 +37,8 @@ const app = new App({
   onload() {
     // Плавающая шапка
     this.initHeadroom()
+
+    this.initScrollBehavior()
   },
 })
 
