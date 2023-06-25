@@ -93,17 +93,14 @@ module.exports = (env, options) => {
     ?  MiniCssExtractPlugin.loader
     : 'style-loader'
 
-  const cssLoaders = [
-    'css-loader',
-    {
-      loader: 'postcss-loader',
-      options: {
-        postcssOptions: {
-          plugins: postcssPlugins
-        }
+  const postcssLoader = {
+    loader: 'postcss-loader',
+    options: {
+      postcssOptions: {
+        plugins: postcssPlugins
       }
     }
-  ]
+  }
 
   return {
     devServer: {
@@ -164,10 +161,11 @@ module.exports = (env, options) => {
         // Обычный CSS
         {
           test: /\.css$/i,
-          exclude: /(src\/components)/,
+          exclude: path.resolve(__dirname, './src/components'),
           use: [
             baseCssLoader,
-            ...cssLoaders
+            'css-loader',
+            postcssLoader,
           ]
         },
         // Импортируемый CSS для веб-компонентов
@@ -175,8 +173,13 @@ module.exports = (env, options) => {
           test: /\.css$/i,
           exclude: /(styles|node_modules)/,
           use: [
-            'to-string-loader',
-            ...cssLoaders
+            {
+              loader: 'css-loader',
+              options: {
+                exportType: 'string',
+              },
+            },
+            postcssLoader,
           ]
         },
         // Шрифты
