@@ -142,7 +142,7 @@ export default class CElement extends HTMLElement {
     if (!toBoolean) return attrValue
 
     // Для boolean-атрибутов
-    const falsyValues = [null, undefined, false]
+    const falsyValues = [null, undefined, false, 'false']
     return !falsyValues.includes(attrValue)
   }
 
