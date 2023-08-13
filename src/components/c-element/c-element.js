@@ -159,4 +159,12 @@ export default class CElement extends HTMLElement {
   $remove(attributeName) {
     this.removeAttribute(attributeName)
   }
+
+  
+  $emit(eventName, params) {
+    if (!eventName) return
+
+    const event = new CustomEvent(eventName, { detail: params })
+    this.dispatchEvent(event)
+  }
 }
