@@ -4,6 +4,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 const TerserPlugin = require("terser-webpack-plugin");
+const postcssGlobalData = require('@csstools/postcss-global-data');
 
 const routes = require('./src/routes.js')
 
@@ -47,11 +48,13 @@ module.exports = (env, options) => {
 
 
   const postcssPlugins = [
+    postcssGlobalData({
+        files: [
+          getPath('./src/assets/styles/common/media.css')
+        ]
+    }),
     [
       'postcss-custom-media',
-      {
-        importFrom: getPath('./src/assets/styles/common/media.css')
-      }
     ],
     [
       'postcss-mixins',
