@@ -117,7 +117,7 @@ module.exports = (env, options) => {
       alias: {
         '@': getPath('./src')
       },
-      extensions: ['.js'],
+      extensions: ['.tsx', '.ts', '.js'],
       modules: ['./node_modules']
     },
     entry,
@@ -151,6 +151,11 @@ module.exports = (env, options) => {
         //     }
         //   }
         // },
+        {
+          test: /\.tsx?$/,
+          use: 'ts-loader',
+          exclude: /node_modules/,
+        },
         {
           test: /\.html$/i,
           exclude: /(pages)/,
@@ -198,7 +203,7 @@ module.exports = (env, options) => {
           test: /\.svg/,
           exclude: /(fonts)/,
           type: 'asset/inline',
-        }
+        },
       ]
     },
     plugins: [

@@ -1,5 +1,5 @@
 import Headroom from 'headroom.js'
-import App from '@/app/App.js'
+import App from '@/app/App.ts'
 
 const app = new App({
   plugins: {},
