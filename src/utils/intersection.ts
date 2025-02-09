@@ -1,13 +1,13 @@
 function applyInstersectionObserver(element: HTMLElement, callback: Function, intermidiate = false) {
   if (typeof callback !== 'function') return
 
-  const observerOptions: {threshold: number} = {}
+  const observerOptions: {threshold?: number} = {}
 
   if (!intermidiate) {
     observerOptions.threshold = 0.6
   }
 
-  const observerCallback = (entries) => {
+  const observerCallback = (entries: IntersectionObserverEntry[]) => {
     const entry = entries[0]
 
     if (entry.isIntersecting) {

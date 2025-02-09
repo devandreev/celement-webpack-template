@@ -15,10 +15,6 @@ export default class CElement extends HTMLElement {
     this.initIntersection()
   }
 
-  get $app() {
-    return window.$app
-  }
-
   // Переопределить в наследнике, если shadowDom не требуется
   getRenderRoot() {
     return this.attachShadow 
@@ -34,7 +30,7 @@ export default class CElement extends HTMLElement {
       threshold: 1.0
     }
 
-    const observerCallback = (entries) => {
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
       const element = entries[0]
 
       if (element.isIntersecting) {
@@ -71,7 +67,7 @@ export default class CElement extends HTMLElement {
 
   // Создаёт и возвращает root-элемент для содержимого слота
   // Служит для передачи контента в слот изнутри компонента
-  $createSlotRoot(slotName) {
+  $createSlotRoot(slotName: string) {
     if (!slotName) {
       console.warn('slotName required')
       return
@@ -84,27 +80,27 @@ export default class CElement extends HTMLElement {
     return root
   }
 
-  $find(query) {
+  $find(query: string) {
     return this.root.querySelector(query)
   }
 
-  $findAll(query) {
+  $findAll(query: string) {
     return this.root.querySelectorAll(query)
   }
 
   $render() {
-    const template = render(this._contentToRender, this.root, { eventContext: this })
+    const template = render(this._contentToRender, this.root, {})
   }
 
   $update() {
     this.$render()
   }
 
-  $on(eventName, callback) {
+  $on(eventName: keyof HTMLElementEventMap, callback: (e: Event) => any) {
     this.addEventListener(eventName, callback)
   }
 
-  $get(attributeName, toBoolean) {
+  $get(attributeName: string, toBoolean: boolean) {
     // Для любых аттрибутов
     const attrValue = this.getAttribute(attributeName)
     if (!toBoolean) return attrValue
@@ -114,7 +110,7 @@ export default class CElement extends HTMLElement {
     return !falsyValues.includes(attrValue)
   }
 
-  $set(attributeName, value, toBoolean) {
+  $set(attributeName: string, value: string, toBoolean: boolean) {
     const isSet = !toBoolean || value
 
     if (isSet) {
@@ -124,12 +120,12 @@ export default class CElement extends HTMLElement {
     }
   }
 
-  $remove(attributeName) {
+  $remove(attributeName: string) {
     this.removeAttribute(attributeName)
   }
 
   
-  $emit(eventName, params) {
+  $emit(eventName: string, params: {}) {
     if (!eventName) return
 
     const event = new CustomEvent(eventName, { detail: params })

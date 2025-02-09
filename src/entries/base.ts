@@ -1,5 +1,5 @@
 // import Headroom from 'headroom.js'
-import App, {AppConfig} from '@/app/App.ts'
+import App, {AppConfig} from '@/app/App'
 
 const app = new App({
   plugins: {},
@@ -41,6 +41,3 @@ const app = new App({
     this.initScrollBehavior()
   },
 } as AppConfig)
-
-// Объект приложения
-window.$app = app 

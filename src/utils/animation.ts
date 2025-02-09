@@ -1,4 +1,4 @@
-export function restartTargetAnimation(target) {
+export function restartTargetAnimation(target: HTMLElement) {
   if (!target?.getAnimations) {
     console.log('getAnimations unavailable', target)
     return

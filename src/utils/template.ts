@@ -1,5 +1,5 @@
-import {truthyObject, truthyValues} from '@/utils/object.ts'
-import { unsafeHTML } from 'lit-html/directives/unsafe-html.js'
+import {truthyObject, truthyValues} from '@/utils/object'
+import { unsafeHTML } from 'lit-html/directives/unsafe-html'
 
 interface DataToIterpolate {
   [index: string]: string
