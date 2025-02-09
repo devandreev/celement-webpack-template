@@ -1,5 +1,5 @@
-export default function(func, delay = 900, immediate) {
-  let timerId;
+export default function(func: Function, delay = 900, immediate?: boolean) {
+  let timerId: number;
   return (...args) => {
     const boundFunc = func.bind(this, ...args);
     if (timerId) {

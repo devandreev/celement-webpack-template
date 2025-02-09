@@ -1,5 +1,5 @@
-import Headroom from 'headroom.js'
-import App from '@/app/App.ts'
+// import Headroom from 'headroom.js'
+import App, {AppConfig} from '@/app/App.ts'
 
 const app = new App({
   plugins: {},
@@ -21,18 +21,18 @@ const app = new App({
         offset: 10
       }
 
-      this.headroom = new Headroom(header, options)
-      this.headroom.init()
+      // this.headroom = new Headroom(header, options)
+      // this.headroom.init()
 
-      requestAnimationFrame(() => {
-        header.classList.remove('headroom--faded')
-      })
+      // requestAnimationFrame(() => {
+      //   header.classList.remove('headroom--faded')
+      // })
     },
   },
 
   created() {},
 
-  onresize(oldScreen, newScreen) {},
+  onresize(oldScreen: string, newScreen: string) {},
 
   onload() {
     // Плавающая шапка
@@ -40,7 +40,7 @@ const app = new App({
 
     this.initScrollBehavior()
   },
-})
+} as AppConfig)
 
 // Объект приложения
 window.$app = app 

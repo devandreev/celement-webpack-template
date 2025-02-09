@@ -1,7 +1,7 @@
-import { camelToDash } from '@/utils/convert-case.js'
-import throttle from '@/utils/throttle.js'
+import { camelToDash } from '@/utils/convert-case.ts'
+import throttle from '@/utils/throttle.ts'
 
-import CElement from '@/components/c-element/c-element.js'
+import CElement from '@/components/c-element/c-element.ts'
 
 interface ComponentList {
   [index: string]: CustomElementConstructor
@@ -11,7 +11,7 @@ interface MethodList {
   [index: string]: Function
 }
 
-interface AppConfig {
+export interface AppConfig {
   // plugins?: []
   components: ComponentList
   methods?: MethodList

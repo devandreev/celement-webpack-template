@@ -1,7 +1,12 @@
 import { render, html } from 'lit-html'
-import { renderTemplate } from '@/utils/template.js'
 
 export default class CElement extends HTMLElement {
+  root: ShadowRoot | CElement
+  observer?: IntersectionObserver
+  intersectedCallback?: Function
+  template?: string
+  styles?: string
+
   constructor() {
     super()
 
@@ -77,43 +82,6 @@ export default class CElement extends HTMLElement {
     this.appendChild(root)
 
     return root
-  }
-
-  // Возращает шаблон, переданный в слот
-  $getSlotTemplate(name) {
-    const templateElement = this.querySelector(`template[slot="${name}"]`)
-
-    if (!templateElement) {
-      console.warn('slot template not exist')
-      return
-    }
-    return templateElement
-  }
-
-  // Возвращает отрендеренный шаблон, переданный в слот
-  $renderSlotTemplate(name, data) {
-    // Берём шаблон из слота item
-    const templateElement = this.$getSlotTemplate(name) 
-
-    if (!templateElement) {
-      console.warn('template not exist')
-      return
-    }
-
-    // Параметры рендеринга шаблона
-    const params = {}
-
-    if (data) {
-      // Имя переменной, используемой в шаблоне
-      // Атрибут data-bind на шаблоне, передаваемом в слот
-      const propertyName = templateElement.dataset.bind || 'item'
-      params[propertyName] = data
-    }
-
-    // Получаем шаблон
-    const itemContent = renderTemplate(templateElement, params)
-
-    return html`${itemContent}`
   }
 
   $find(query) {

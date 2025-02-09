@@ -1,7 +1,7 @@
-function applyInstersectionObserver(element, callback, intermidiate = false) {
+function applyInstersectionObserver(element: HTMLElement, callback: Function, intermidiate = false) {
   if (typeof callback !== 'function') return
 
-  const observerOptions = {}
+  const observerOptions: {threshold: number} = {}
 
   if (!intermidiate) {
     observerOptions.threshold = 0.6
@@ -22,7 +22,7 @@ function applyInstersectionObserver(element, callback, intermidiate = false) {
   return observer
 }
 
-export function onElementShow(element, callback, intermidiate = false) {
+export function onElementShow(element: HTMLElement, callback: Function, intermidiate = false) {
   if (typeof callback !== 'function') return
 
   const observer = applyInstersectionObserver(

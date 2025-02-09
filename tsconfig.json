@@ -1,15 +1,17 @@
 {
   "compilerOptions": {
     // "outDir": "./dist/",
+    // "allowImportingTsExtensions": true,
     "noImplicitAny": true,
-    "module": "es6",
-    "target": "es5",
+    // "module": "es6",
+    // "target": "es5",
     // "jsx": "react",
     // "moduleResolution": "node",
-    "allowJs": true,
+    // "allowJs": true,
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
     }
-  }
+  },
+  "exclude": ["node_modules"]
 }

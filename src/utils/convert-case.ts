@@ -1,4 +1,4 @@
-export const camelToDash = (str) => {
+export const camelToDash = (str: string) => {
     return str
       .replace(/[^a-zA-Z0-9]+/g, '-')
       .replace(/([A-Z]+)([A-Z][a-z])/g, '$1-$2')

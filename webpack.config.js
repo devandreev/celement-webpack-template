@@ -25,7 +25,7 @@ module.exports = (env, options) => {
   const entry = isProd
     ? { // Для продакшена
     base: [
-      getPath('./src/entries/base.js')
+      getPath('./src/entries/base.ts')
     ],
     styles: [
       getPath('./src/assets/styles/entries/root.js'),
@@ -39,7 +39,7 @@ module.exports = (env, options) => {
     : [ // Для hot-reload
     getPath('./src/assets/styles/common/fonts.css'),
     getPath('./src/assets/styles/entries/root.js'),
-    getPath('./src/entries/base.js'),
+    getPath('./src/entries/base.ts'),
     getPath('./src/assets/styles/entries/top.js'),
     getPath('./src/assets/styles/entries/common.js'),
     getPath('./src/assets/styles/entries/ui.js'),
